@@ -1,74 +1,49 @@
 import React, { Component } from 'react';
-// import {connect} from 'react-redux'
+import {connect} from 'react-redux'
 // import logo from './logo.svg';
 import './App.css';
+import NowPlaying from './NowPlaying';
 import Search from './Search';
+import QueueList from './QueueList';
+import getHashParams from '../../utils.js';
+import {setLoggedIn} from '../../store/spotify';
 
+const mapStateToProps = state => ({
+  isLoggedIn: state.spotifyReducer.isLoggedIn
+})
+const mapDispatchToProps = dispatch => ({
+  setLoggedIn: (token) => dispatch(setLoggedIn(token))
+});
 
 class App extends Component {
-
-  constructor() {
-    super()
-    this.state = {
-      songs: [
-        {'songName': 'Fireflies', 'artistName': 'Owl City'},
-        {'songName':'Whatever It Takes', 'artistName': 'Imagine Dragons'}
-      ],
-      newSongName: '',
-      newArtistName: ''
-    }
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState(
-      {
-        songs: [...this.state.songs, {'songName': this.state.newSongName, 'artistName': this.state.newArtistName}],
-        newSongName: '',
-        newArtistName: ''
-      }
-    );
-  };
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  };
+  componentDidMount(){
+    const params = getHashParams();
+    if (params.access_token) {
+      this.props.setLoggedIn(params.access_token);
+      window.history.pushState('home', 'Title', '/');
+    };
+  }
 
   render() {
-    const {songs, newSongName, newArtistName} = this.state;
-    console.log(songs);
 
+    let returnVal = (
+    <a href="http://localhost:8888">
+      <button>Login with spotify</button>
+    </a>);
+    if (this.props.isLoggedIn){
+      returnVal = (
+        <div>
+          <NowPlaying />
+          <Search />
+          <QueueList />
+        </div>);
+    }
     return (
       <div>
-          <div>Search results:
-            <Search />
-          </div>
-          <form>
-            <input placeholder='search' onChange={this.handleChange} name='newSongName' value={newSongName}/>
-            <input placeholder='search' onChange={this.handleChange} name='newArtistName' value={newArtistName}/>
-            <button type="submit" onClick={this.handleSubmit}>Add to the queue</button>
-          </form>
-
-          <table>
-            <tbody>
-              <tr>
-                <th>Song name</th>
-                <th>Artist</th>
-              </tr>
-              {songs.map(song => (
-                <tr key={songs.indexOf(song)}>
-                  <td>{song.songName}</td>
-                  <td>{song.artistName}</td>
-                </tr>
-              )
-              )}
-            </tbody>
-          </table>
+        {returnVal}
       </div>
     );
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

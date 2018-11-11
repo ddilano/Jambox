@@ -1,77 +1,50 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {searchThunk} from '../../store';
-// import logo from './logo.svg';
+import {searchThunk, addToQueue} from '../../store/spotify';
 import './App.css';
 
 const mapStateToProps = state => ({
-  songs: state.searchResults
+  findings: state.spotifyReducer.findings
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    searchThunk: () => dispatch(searchThunk())
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  searchThunk: (q, types, limit) => dispatch(searchThunk(q, types, limit)),
+  addToQueue: (song) => dispatch(addToQueue(song))
+});
 
 class Search extends Component {
 
-  componentDidMount() {
-    this.props.searchThunk();
+  searchOnChange = (event) => {
+    let q = event.target.value;
+    this.props.searchThunk(q);
   };
 
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     newSongName: '',
-  //     newArtistName: ''
-  //   }
-  // };
-
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   this.setState(
-  //     {
-  //       songs: [...this.state.songs, {'songName': this.state.newSongName, 'artistName': this.state.newArtistName}],
-  //       newSongName: '',
-  //       newArtistName: ''
-  //     }
-  //   );
-  // };
-
-  // handleChange = (event) => {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   })
-  // };
+  clickResult = (song) => {
+    this.props.addToQueue(song);
+  }
 
   render() {
-    const {songs} = this.props;
+    const {findings} = this.props;
 
+    let returnVal;
+    if (findings.length) {
+        returnVal = (
+          <div>
+            {findings.map(
+              f => <div key={f.id} onClick={() => this.clickResult(f)}>{f.name} - {f.artist}</div>
+            )}
+          </div>
+        );
+    } else {
+      returnVal = <div>No tracks found</div>;
+    }
     return (
       <div>
-          <form>
-            <input placeholder='make a search' onChange={this.handleChange} />
-            <input placeholder='add artist name' onChange={this.handleChange} />
-            <button type="submit" onClick={this.handleSubmit}>Add to the queue</button>
-          </form>
-
-          <table>
-            <tbody>
-              <tr>
-                <th>Song name</th>
-                <th>Artist</th>
-              </tr>
-              {songs.map(song =>
-                <tr key={songs.indexOf(song)}>
-                  <td>{song.songName}</td>
-                  <td>{song.artistName}</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+        <h3>Search</h3>
+        <input placeholder="search something" onChange={this.searchOnChange}></input>
+        {returnVal}
       </div>
-    );
+    )
   }
 }
 

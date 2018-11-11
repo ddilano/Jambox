@@ -12,8 +12,11 @@
     "react-redux": "^5.1.0",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "request": "~2.83.0"
+    "request": "~2.83.0",
+    "semantic-ui-react": "^0.83.0",
+    "spotify-web-api-js": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
