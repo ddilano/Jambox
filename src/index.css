@@ -69,6 +69,10 @@ h3 {
   word-spacing: 2px;
 }
 
+.queue-list-text {
+  margin-top: 10px;
+}
+
 .search-results {
   margin-left: 5%;
 }

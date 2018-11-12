@@ -27,7 +27,7 @@ class QueueList extends Component {
         <div>
           {queue.map(
             q => (
-              <div key={q.id}>
+              <div key={q.id} className="queue-list-text">
                 <img src={q.image} className="queue-list-img"/> {q.name} - {q.artist} - {q.totalVotes}
                 <button type='button' name='Upvote' onClick={(event) => this.clickResult(event, q)}className="upvote-downvote-btn">↑</button>
                 <button type='button' name='Downvote' onClick={(event) => this.clickResult(event, q)} className="upvote-downvote-btn">↓</button>
