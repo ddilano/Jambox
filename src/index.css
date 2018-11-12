@@ -78,7 +78,7 @@ h3 {
 }
 
 .search-bar div:hover {
-  color: #8cc3e6;
+  background-color: red;
 }
 
 .now-playing-info {
