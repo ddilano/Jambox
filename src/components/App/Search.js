@@ -29,19 +29,19 @@ class Search extends Component {
     let returnVal;
     if (findings.length) {
         returnVal = (
-          <div>
+          <div className="search-bar">
             {findings.map(
               f => <div key={f.id} onClick={() => this.clickResult(f)}>{f.name} - {f.artist}</div>
             )}
           </div>
         );
     } else {
-      returnVal = <div>No tracks found</div>;
+      returnVal = <div className="search-results">No songs found</div>;
     }
     return (
       <div>
         <h3>Search</h3>
-        <input placeholder="search something" onChange={this.searchOnChange}></input>
+        <input placeholder="Search a song, an album or artist" onChange={this.searchOnChange} className="search-bar"></input>
         {returnVal}
       </div>
     )

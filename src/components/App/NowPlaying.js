@@ -32,11 +32,12 @@ class NowPlaying extends Component {
     if (nowPlaying) {
       return (
         <div>
-          {/* <div>% of song completed {(nowPlaying.progress/nowPlaying.duration)*100}</div> */}
-          <div>Now Playing: {nowPlaying.name} by {nowPlaying.artist}</div>
-              <div>
-                <img src={nowPlaying.image} style={{width: 100}}/>
-              </div>
+            <h3>Now Playing:</h3>
+            <div>
+              <img src={nowPlaying.image} className="now-playing-image"/>
+              <div className="now-playing-info">{nowPlaying.name} - {nowPlaying.artist}</div>
+            </div>
+
           <ProgressBar key={nowPlaying.id} duration={nowPlaying.duration} />
         </div>
       )

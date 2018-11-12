@@ -28,9 +28,9 @@ class QueueList extends Component {
           {queue.map(
             q => (
               <div key={q.id}>
-                <img src={q.image} style={{width: 45}}/> {q.name} - {q.artist} - {q.totalVotes}
-                <button type='button' name='Upvote' onClick={(event) => this.clickResult(event, q)}>↑</button>
-                <button type='button' name='Downvote' onClick={(event) => this.clickResult(event, q)}>↓</button>
+                <img src={q.image} className="queue-list-img"/> {q.name} - {q.artist} - {q.totalVotes}
+                <button type='button' name='Upvote' onClick={(event) => this.clickResult(event, q)}className="upvote-downvote-btn">↑</button>
+                <button type='button' name='Downvote' onClick={(event) => this.clickResult(event, q)} className="upvote-downvote-btn">↓</button>
               </div>
             )
           )}
@@ -41,9 +41,9 @@ class QueueList extends Component {
     }
 
     return (
-      <div>
-        <h3>Queue List</h3>
-        {queueList}
+      <div >
+        <h3><strong>Queue List</strong></h3>
+        <div className="queue-list">{queueList}</div>
       </div>
     )
   };

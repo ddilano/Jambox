@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import { subscribeToTimer } from './api';
 // import logo from './logo.svg';
 import './App.css';
 import NowPlaying from './NowPlaying';
@@ -20,7 +21,7 @@ class App extends Component {
     const params = getHashParams();
     if (params.access_token) {
       this.props.setLoggedIn(params.access_token);
-      window.history.pushState('home', 'Title', '/');
+      // window.history.pushState('home', 'Title', '/');
     };
   }
 
@@ -40,6 +41,8 @@ class App extends Component {
     }
     return (
       <div>
+        <div className="jambox">JAMBOX</div>
+
         {returnVal}
       </div>
     );
