@@ -28,7 +28,7 @@ class App extends Component {
   render() {
 
     let returnVal = (
-    <a href="https://jambox-server.herokuapp.com">
+    <a href="https://jambox-server.herokuapp.com/login">
       <button>Login with spotify</button>
     </a>);
     if (this.props.isLoggedIn){
