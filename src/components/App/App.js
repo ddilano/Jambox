@@ -21,7 +21,7 @@ class App extends Component {
     const params = getHashParams();
     if (params.access_token) {
       this.props.setLoggedIn(params.access_token);
-      // window.history.pushState('home', 'Title', '/');
+      window.history.pushState('home', 'Title', '/');
     };
   }
 
