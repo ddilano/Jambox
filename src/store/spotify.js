@@ -101,6 +101,7 @@ const spotifyReducer = (state=initialState, action) => {
           return state;
         }
         const queue = [...state.queue, {...action.song, totalVotes: 0}];
+        queue.sort((s1, s2) => s1.totalVotes < s2.totalVotes);
         return {...state, queue};
       case CHANGE_TOTAL_VOTE:
       {
