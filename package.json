@@ -2,6 +2,9 @@
   "name": "jambox",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.8.0"
+  },
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
