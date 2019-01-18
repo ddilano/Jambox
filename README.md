@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Jambox is a small project I've developed in four days in our Stackathon at Grace Hopper Program. I wanted to find a fun way to showcase the music being played in the party room, and make people add songs to playlist and vote on what to play next.
+
 ## Available Scripts
 
 In the project directory, you can run:
